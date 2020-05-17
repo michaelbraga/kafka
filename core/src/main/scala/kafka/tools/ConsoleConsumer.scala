@@ -226,6 +226,7 @@ object ConsoleConsumer extends Logging {
       "The properties to initialize the message formatter. Default properties include:\n" +
         "\tprint.timestamp=true|false\n" +
         "\tprint.key=true|false\n" +
+        "\tprint.offsets=true|false\n" +
         "\tprint.value=true|false\n" +
         "\tkey.separator=<key.separator>\n" +
         "\tline.separator=<line.separator>\n" +
@@ -459,6 +460,7 @@ object ConsoleConsumer extends Logging {
 class DefaultMessageFormatter extends MessageFormatter {
   var printKey = false
   var printValue = true
+  var printOffsets = true
   var printTimestamp = false
   var keySeparator = "\t".getBytes(StandardCharsets.UTF_8)
   var lineSeparator = "\n".getBytes(StandardCharsets.UTF_8)
@@ -469,6 +471,11 @@ class DefaultMessageFormatter extends MessageFormatter {
   override def init(props: Properties): Unit = {
     if (props.containsKey("print.timestamp"))
       printTimestamp = props.getProperty("print.timestamp").trim.equalsIgnoreCase("true")
+    
+    // -- OFFSETS 
+    if (props.containsKey("print.offsets"))
+      printOffsets = props.getProperty("print.offsets").trim.equalsIgnoreCase("true")
+    
     if (props.containsKey("print.key"))
       printKey = props.getProperty("print.key").trim.equalsIgnoreCase("true")
     if (props.containsKey("print.value"))
@@ -523,6 +530,11 @@ class DefaultMessageFormatter extends MessageFormatter {
         output.write(s"$timestampType:$timestamp".getBytes(StandardCharsets.UTF_8))
       else
         output.write(s"NO_TIMESTAMP".getBytes(StandardCharsets.UTF_8))
+      writeSeparator(printKey || printValue || printOffsets)
+    }
+
+    if (printOffsets) {
+      output.write(s"[${consumerRecord.partition}:${consumerRecord.offset()}]".getBytes(StandardCharsets.UTF_8))
       writeSeparator(printKey || printValue)
     }
 
