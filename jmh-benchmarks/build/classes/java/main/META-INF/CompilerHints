@@ -1,0 +1,17 @@
+dontinline,*.*_all_jmhStub
+dontinline,*.*_avgt_jmhStub
+dontinline,*.*_sample_jmhStub
+dontinline,*.*_ss_jmhStub
+dontinline,*.*_thrpt_jmhStub
+inline,org/apache/kafka/jmh/cache/LRUCacheBenchmark.setUp
+inline,org/apache/kafka/jmh/cache/LRUCacheBenchmark.testCachePerformance
+inline,org/apache/kafka/jmh/common/TopicBenchmark.testValidate
+inline,org/apache/kafka/jmh/partition/UpdateFollowerFetchStateBenchmark.setUp
+inline,org/apache/kafka/jmh/partition/UpdateFollowerFetchStateBenchmark.tearDown
+inline,org/apache/kafka/jmh/partition/UpdateFollowerFetchStateBenchmark.updateFollowerFetchStateBench
+inline,org/apache/kafka/jmh/partition/UpdateFollowerFetchStateBenchmark.updateFollowerFetchStateBenchNoChange
+inline,org/apache/kafka/jmh/producer/ProducerRecordBenchmark.constructorBenchmark
+inline,org/apache/kafka/jmh/record/RecordBatchIterationBenchmark.init
+inline,org/apache/kafka/jmh/record/RecordBatchIterationBenchmark.measureIteratorForBatchWithSingleMessage
+inline,org/apache/kafka/jmh/record/RecordBatchIterationBenchmark.measureSkipIteratorForVariableBatchSize
+inline,org/apache/kafka/jmh/record/RecordBatchIterationBenchmark.measureStreamingIteratorForVariableBatchSize
